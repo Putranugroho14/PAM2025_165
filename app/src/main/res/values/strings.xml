@@ -1,0 +1,152 @@
+<resources>
+    <string name="app_name">Service Manager Bengkel</string>
+
+    <!-- Dashboard & Main -->
+    <string name="title_dashboard">Dashboard</string>
+    <string name="action_logout">Logout</string>
+    <string name="selamat_datang_dashboard">Selamat Datang di Dashboard!</string>
+    <string name="kelola_pelanggan">🚗 Kelola Pelanggan</string>
+    <string name="kelola_mobil">🚘 Kelola Mobil</string>
+    <string name="riwayat_servis">🔧 Riwayat Servis</string>
+    <!-- Main Activity - Dashboard -->
+    <string name="selamat_datang">Selamat Datang,</string>
+    <string name="admin_bengkel">Admin Bengkel</string>
+    <string name="statistik">Statistik</string>
+    <string name="total_pelanggan">Total Pelanggan</string>
+    <string name="total_mobil">Total Mobil</string>
+    <string name="servis_bulan_ini">Servis Bulan Ini</string>
+    <string name="menu_utama">Menu Utama</string>
+    <string name="tambah_edit_kelola_pelanggan">Tambah, edit, dan kelola data pelanggan</string>
+    <string name="tambah_edit_kelola_mobil">Tambah, edit, dan kelola data mobil</string>
+    <string name="catat_kelola_riwayat">Catat dan kelola riwayat servis mobil</string>
+    <string name="logout">Logout</string>
+
+    <!-- Dialog Logout -->
+    <string name="konfirmasi_logout">Konfirmasi Logout</string>
+    <string name="apakah_yakin_logout">Apakah Anda yakin ingin keluar?</string>
+    <string name="ya">Ya</string>
+    <string name="tidak">Tidak</string>
+
+    <!-- Common -->
+    <string name="error_koneksi_gagal">Gagal terhubung ke server</string>
+    <string name="loading">Memproses, mohon tunggu</string>
+    <string name="simpan">SIMPAN</string>
+    <string name="placeholder_dash">-</string>
+
+    <!-- Authentication -->
+    <string name="prompt_ke_login">Sudah punya akun? Login</string>
+    <string name="prompt_ke_register">Belum punya akun? Daftar</string>
+
+    <!-- Login -->
+    <string name="title_login">Selamat Datang</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="login_berhasil">Login Berhasil!</string>
+
+    <!-- Register -->
+    <string name="title_register">Registrasi Akun Baru</string>
+    <string name="hint_kode_registrasi">Kode Registrasi (SA + 6 digit)</string>
+    <string name="button_register">Daftar Akun</string>
+    <string name="register_berhasil">Registrasi Berhasil! Silakan Login.</string>
+
+    <!-- Validation -->
+    <string name="validation_required">Kolom ini wajib diisi</string>
+    <string name="validation_kode_registrasi_length">Kode Registrasi harus 8 karakter (SA + 6 digit)</string>
+
+    <!-- Pelanggan (Customer) -->
+    <string name="nama_pelanggan">Nama Pelanggan</string>
+    <string name="nomor_hp">Nomor HP</string>
+    <string name="alamat">Alamat</string>
+    <string name="alamat_optional">Alamat (Opsional)</string>
+    <string name="terdaftar_sejak">Terdaftar Sejak</string>
+    <string name="belum_ada_data_pelanggan">Belum ada data pelanggan</string>
+    <string name="tambah_pelanggan">Tambah Pelanggan</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <!-- Mobil (Car) -->
+    <string name="plat_nomor">Plat Nomor</string>
+    <string name="merek">Merek</string>
+    <string name="pemilik">Pemilik</string>
+    <string name="belum_ada_data_mobil">Belum ada data mobil</string>
+    <string name="tambah_mobil">Tambah Mobil</string>
+
+    <!-- Servis (Service) -->
+    <string name="tanggal_servis">Tanggal Servis</string>
+    <string name="pilih_mobil">Pilih Mobil</string>
+    <string name="deskripsi_pekerjaan">Deskripsi Pekerjaan</string>
+    <string name="biaya">Biaya</string>
+    <string name="biaya_rp">Biaya (Rp)</string>
+    <string name="status">Status</string>
+    <string name="dicatat_pada">Dicatat Pada</string>
+    <string name="empty_servis">Belum ada riwayat servis</string>
+    <string name="hint_search_servis">Cari servis…</string>
+    <string name="content_desc_add_servis">Catat Servis</string>
+    <string name="catat_servis">Catat Servis</string>
+
+    <!-- Form Labels -->
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <!-- Dashboard -->
+    <string name="welcome_message">Selamat datang! Kelola bengkel Anda dengan mudah</string>
+    <string name="menu_pelanggan">Kelola Pelanggan</string>
+    <string name="menu_mobil">Kelola Mobil</string>
+    <string name="menu_servis">Riwayat Servis</string>
+    <string name="menu_servis_desc">Lihat dan kelola semua servis</string>
+    <string name="quick_info_title">Informasi Cepat</string>
+    <string name="system_status">Sistem berjalan dengan baik</string>
+    <string name="dashboard_tip">Tips: Gunakan menu di atas untuk mengelola data bengkel Anda</string>
+
+    <!-- Content Descriptions -->
+    <string name="info_icon">Info icon</string>
+    <string name="navigate_icon">Navigate icon</string>
+    <!-- Pelanggan -->
+    <string name="title_pelanggan">Daftar Pelanggan</string>
+    <string name="title_tambah_pelanggan">Tambah Pelanggan</string>
+    <string name="title_detail_pelanggan">Detail Pelanggan</string>
+    <string name="search_pelanggan">Cari nama atau nomor HP…</string>
+    <string name="add_pelanggan">Tambah Pelanggan</string>
+
+    <!-- Empty State -->
+    <string name="empty_pelanggan">Belum ada data pelanggan</string>
+    <string name="empty_pelanggan_desc">Tap tombol + untuk menambahkan pelanggan pertama Anda</string>
+    <string name="empty_state">Empty state</string>
+
+    <!-- Form -->
+    <string name="form_pelanggan_info">Isi data pelanggan dengan lengkap dan benar</string>
+    <string name="hint_nama_pelanggan">Nama Pelanggan</string>
+    <string name="hint_no_hp">Nomor HP</string>
+    <string name="hint_alamat">Alamat</string>
+    <string name="helper_optional">Opsional</string>
+    <string name="action_save">Simpan Data</string>
+
+    <!-- Detail -->
+    <string name="section_contact">Informasi Kontak</string>
+    <string name="label_no_hp">Nomor HP</string>
+    <string name="label_alamat">Alamat</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Hapus</string>
+
+    <!-- Default Values -->
+    <string name="default_name">-</string>
+    <string name="default_phone">-</string>
+    <string name="default_address">-</string>
+    <string name="default_date">-</string>
+
+    <!-- Icons -->
+    <string name="profile_icon">Profile icon</string>
+    <string name="phone_icon">Phone icon</string>
+    <string name="location_icon">Location icon</string>
+
+    <!-- Filter & Laporan Servis -->
+    <string name="filter_pencarian">Filter Pencarian</string>
+    <string name="filter_nama_pelanggan">Nama Pelanggan</string>
+    <string name="filter_status_servis">Status Servis</string>
+    <string name="filter_rentang_tanggal">Rentang Tanggal</string>
+    <string name="filter_dari">Dari</string>
+    <string name="filter_sampai">Sampai</string>
+    <string name="filter_reset">Reset</string>
+    <string name="filter_terapkan">Terapkan</string>
+
+
+</resources>
