@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.example.b_manager.databinding.ActivityRegisterBinding
 import com.example.b_manager.utils.ValidationHelper
 import com.example.b_manager.viewmodel.AuthViewModel
@@ -17,6 +18,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
