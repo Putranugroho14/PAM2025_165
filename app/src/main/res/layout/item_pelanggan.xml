@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/white"
+    app:strokeColor="#F1F5F9"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Avatar -->
+        <FrameLayout
+            android:id="@+id/avatar_container"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/info_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_people"
+                app:tint="@color/info"/>
+        </FrameLayout>
+
+        <!-- Action Buttons (Right Side) -->
+        <LinearLayout
+            android:id="@+id/action_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_edit"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="6dp"
+                android:src="@drawable/ic_edit"
+                app:tint="@color/primary"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"/>
+
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:padding="6dp"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/error"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"/>
+        </LinearLayout>
+
+        <!-- Name -->
+        <TextView
+            android:id="@+id/tvNamaPelanggan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Nama Pelanggan"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/avatar_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_buttons"/>
+
+        <!-- Phone -->
+        <ImageView
+            android:id="@+id/ic_phone"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/ic_phone"
+            app:tint="#94A3B8"
+            android:layout_marginTop="6dp"
+            app:layout_constraintStart_toStartOf="@id/tvNamaPelanggan"
+            app:layout_constraintTop_toBottomOf="@id/tvNamaPelanggan"/>
+
+        <TextView
+            android:id="@+id/tvNomorHP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="0812-3456-7890"
+            android:textSize="12sp"
+            android:textColor="#64748B"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toEndOf="@id/ic_phone"
+            app:layout_constraintTop_toTopOf="@id/ic_phone"
+            app:layout_constraintBottom_toBottomOf="@id/ic_phone"
+            app:layout_constraintEnd_toStartOf="@id/action_buttons"/>
+
+        <!-- Address -->
+        <ImageView
+            android:id="@+id/ic_loc"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/ic_location"
+            app:tint="#94A3B8"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/tvNamaPelanggan"
+            app:layout_constraintTop_toBottomOf="@id/ic_phone"/>
+
+        <TextView
+            android:id="@+id/tvAlamat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Alamat Pelanggan"
+            android:textSize="12sp"
+            android:textColor="#64748B"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/ic_loc"
+            app:layout_constraintTop_toTopOf="@id/ic_loc"
+            app:layout_constraintBottom_toBottomOf="@id/ic_loc"
+            app:layout_constraintEnd_toStartOf="@id/action_buttons"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
