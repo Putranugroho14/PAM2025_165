@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Colors - Modern Deep Blue & Vibrant Accents -->
+    <color name="primary">#4F46E5</color> <!-- Indigo 600 -->
+    <color name="primary_dark">#4338CA</color> <!-- Indigo 700 -->
+    <color name="primary_light">#818CF8</color> <!-- Indigo 400 -->
+    <color name="primary_50">#EEF2FF</color> <!-- Indigo 50 -->
+    <color name="primary_100">#E0E7FF</color> <!-- Indigo 100 -->
+
+    <color name="secondary">#8B5CF6</color> <!-- Violet -->
+    <color name="secondary_dark">#7C3AED</color>
+    <color name="secondary_light">#A78BFA</color>
+
+    <color name="accent">#F43F5E</color> <!-- Rose -->
+    <color name="accent_light">#FB7185</color>
+    
+    <!-- Backgrounds -->
+    <color name="primary_deep_purple">#2D2051</color>
+    <color name="primary_deep_purple_light">#3E3368</color>
+    <color name="accent_salmon">#FF9090</color>
+    <color name="text_dark">#2B2B2B</color>
+    <color name="text_gray">#979797</color>
+    <color name="soft_bg">#F6F7FA</color>
+    
+    <color name="background">#F6F7FA</color> <!-- Cool Gray 50 -->
+    <color name="background_secondary">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_elevated">#FFFFFF</color>
+
+    <!-- Typography -->
+    <color name="text_primary">#0F172A</color> <!-- Slate 900 -->
+    <color name="text_secondary">#475569</color> <!-- Slate 600 -->
+    <color name="text_tertiary">#94A3B8</color> <!-- Slate 400 -->
+    <color name="text_disabled">#CBD5E1</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Semantic Colors -->
+    <color name="success">#10B981</color> <!-- Emerald -->
+    <color name="success_light">#ECFDF5</color>
+    <color name="warning">#F59E0B</color> <!-- Amber -->
+    <color name="warning_light">#FFFBEB</color>
+    <color name="error">#EF4444</color> <!-- Red -->
+    <color name="error_light">#FEF2F2</color>
+    <color name="info">#0EA5E9</color> <!-- Sky -->
+    <color name="info_light">#F0F9FF</color>
+
+    <!-- Utils -->
+    <color name="divider">#E2E8F0</color>
+    <color name="border">#CBD5E1</color>
+    <color name="border_light">#E2E8F0</color>
+
+    <color name="overlay">#80000000</color>
+    <color name="shadow">#20000000</color> <!-- Soft shadow -->
+    <color name="ripple">#202563EB</color>
+
+    <!-- Status Badges Specific -->
+    <color name="status_proses_bg">#FFF7ED</color> <!-- Orange 50 -->
+    <color name="status_proses_text">#C2410C</color> <!-- Orange 700 -->
+    <color name="status_selesai_bg">#F0FDF4</color> <!-- Green 50 -->
+    <color name="status_selesai_text">#15803D</color> <!-- Green 700 -->
+    <color name="status_batal_bg">#FEF2F2</color> <!-- Red 50 -->
+    <color name="status_batal_text">#B91C1C</color> <!-- Red 700 -->
+
+    <color name="status_proses">#F59E0B</color>
+    <color name="status_selesai">#10B981</color>
+    <color name="status_batal">#EF4444</color>
+
+    <!-- Gradients -->
+    <color name="gradient_start">#2563EB</color>
+    <color name="gradient_end">#7C3AED</color> <!-- Blue to Violet gradient -->
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <!-- Status Colors (Specific for Dashboard) -->
+    <color name="bg_stat_total">#E3F2FD</color>
+    <color name="text_stat_total">#1976D2</color>
+
+    <color name="bg_stat_money">#E8F5E9</color>
+    <color name="text_stat_money">#388E3C</color>
+
+    <color name="bg_stat_success">#F1F8E9</color>
+    <color name="text_stat_success">#689F38</color>
+
+    <color name="bg_stat_process">#FFF3E0</color>
+    <color name="text_stat_process">#F57C00</color>
+
+    <color name="bg_stat_cancel">#FFEBEE</color>
+    <color name="text_stat_cancel">#D32F2F</color>
+</resources>
