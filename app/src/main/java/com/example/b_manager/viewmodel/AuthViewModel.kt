@@ -21,6 +21,9 @@ class AuthViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _resetResult = MutableLiveData<Result<Boolean>>()
+    val resetResult: LiveData<Result<Boolean>> = _resetResult
+
     fun register(kodeRegistrasi: String, username: String, password: String, namaLengkap: String) {
         _isLoading.value = true
         viewModelScope.launch {
@@ -35,6 +38,15 @@ class AuthViewModel : ViewModel() {
         viewModelScope.launch {
             val result = repository.login(username, password)
             _loginResult.value = result
+            _isLoading.value = false
+        }
+    }
+
+    fun resetPassword(username: String, kodeRegistrasi: String, newPassword: String) {
+        _isLoading.value = true
+        viewModelScope.launch {
+            val result = repository.resetPassword(username, kodeRegistrasi, newPassword)
+            _resetResult.value = result
             _isLoading.value = false
         }
     }

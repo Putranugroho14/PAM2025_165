@@ -24,6 +24,14 @@ interface ApiService {
         @Field("password") password: String
     ): Response<ApiResponse<Admin>>
 
+    @POST("auth/reset_password.php")
+    @FormUrlEncoded
+    suspend fun resetPassword(
+        @Field("username") username: String,
+        @Field("kode_registrasi") kodeRegistrasi: String,
+        @Field("new_password") newPassword: String
+    ): Response<ApiResponse<Any>>
+
     // ==================== PELANGGAN ====================
 
     @POST("pelanggan/create.php")
