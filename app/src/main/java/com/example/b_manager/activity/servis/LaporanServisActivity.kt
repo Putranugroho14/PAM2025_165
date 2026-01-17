@@ -43,6 +43,7 @@ class LaporanServisActivity : AppCompatActivity() {
 
         setupToolbar()
         setupRecyclerView()
+        setupSearch()
         setupChipFilters()
         setupCustomFilter()
         setupExportButtons()
@@ -68,6 +69,29 @@ class LaporanServisActivity : AppCompatActivity() {
         )
         binding.rvServis.layoutManager = LinearLayoutManager(this)
         binding.rvServis.adapter = adapter
+    }
+
+    private fun setupSearch() {
+        binding.searchView.addTextChangedListener(object : android.text.TextWatcher {
+            override fun afterTextChanged(s: android.text.Editable?) {
+                applyFilters()
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    private fun applyFilters() {
+        val query = binding.searchView.text.toString().trim()
+        val statusText = binding.actvStatus.text.toString()
+        val statusFilter = if (statusText == "Semua" || statusText.isEmpty()) null else statusText
+
+        viewModel.filterServis(
+            nama = if (query.isEmpty()) null else query,
+            status = statusFilter,
+            tanggalDari = dariTanggal,
+            tanggalSampai = sampaiTanggal
+        )
     }
 
     private fun setupChipFilters() {
@@ -144,6 +168,7 @@ class LaporanServisActivity : AppCompatActivity() {
             sampaiTanggal = null
             binding.etDariTanggal.text?.clear()
             binding.etSampaiTanggal.text?.clear()
+            binding.searchView.text?.clear()
             binding.actvStatus.setText("Semua", false)
             binding.chipGroupFilter.clearCheck()
             binding.cardCustomFilter.visibility = View.GONE
@@ -153,16 +178,8 @@ class LaporanServisActivity : AppCompatActivity() {
 
         // Tombol Terapkan
         binding.btnTerapkan.setOnClickListener {
-            val status = binding.actvStatus.text.toString()
-            val statusFilter = if (status == "Semua") null else status
-
             if (dariTanggal != null && sampaiTanggal != null) {
-                viewModel.filterServis(
-                    nama = null,
-                    status = statusFilter,
-                    tanggalDari = dariTanggal,
-                    tanggalSampai = sampaiTanggal
-                )
+                applyFilters()
                 updatePeriodeText(dariTanggal!!, sampaiTanggal!!)
             } else {
                 DialogUtils.showAlertDialog(
@@ -281,13 +298,11 @@ class LaporanServisActivity : AppCompatActivity() {
     private fun filterHariIni() {
         val today = Calendar.getInstance()
         val todayStr = dateFormat.format(today.time)
+        
+        dariTanggal = todayStr
+        sampaiTanggal = todayStr
 
-        viewModel.filterServis(
-            nama = null,
-            status = null,
-            tanggalDari = todayStr,
-            tanggalSampai = todayStr
-        )
+        applyFilters()
         binding.tvPeriode.text = "📅 Periode: Hari Ini"
     }
 
@@ -299,12 +314,10 @@ class LaporanServisActivity : AppCompatActivity() {
         cal.add(Calendar.DAY_OF_WEEK, 6)
         val endWeek = dateFormat.format(cal.time)
 
-        viewModel.filterServis(
-            nama = null,
-            status = null,
-            tanggalDari = startWeek,
-            tanggalSampai = endWeek
-        )
+        dariTanggal = startWeek
+        sampaiTanggal = endWeek
+
+        applyFilters()
         binding.tvPeriode.text = "📅 Periode: Minggu Ini"
     }
 
@@ -316,12 +329,10 @@ class LaporanServisActivity : AppCompatActivity() {
         cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH))
         val endMonth = dateFormat.format(cal.time)
 
-        viewModel.filterServis(
-            nama = null,
-            status = null,
-            tanggalDari = startMonth,
-            tanggalSampai = endMonth
-        )
+        dariTanggal = startMonth
+        sampaiTanggal = endMonth
+
+        applyFilters()
         binding.tvPeriode.text = "📅 Periode: Bulan Ini"
     }
 

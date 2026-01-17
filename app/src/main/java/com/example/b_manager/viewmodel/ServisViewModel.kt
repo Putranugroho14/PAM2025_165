@@ -131,42 +131,53 @@ class ServisViewModel : ViewModel() {
         tanggalDari: String?,
         tanggalSampai: String?
     ) {
-        // 🔑 PASTIKAN DATA SUDAH ADA
-        if (allServis.isEmpty()) {
-            loadServis()
-            return
-        }
-
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val sdfApi = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-
-        val dateDari = tanggalDari?.let { sdf.parse(it) }
-        val dateSampai = tanggalSampai?.let { sdf.parse(it) }
-
-        val result = allServis.filter { servis ->
-
-            val cocokNama =
-                nama.isNullOrBlank() ||
-                        (servis.namaPelanggan ?: "").contains(nama, true)
-
-            val cocokStatus =
-                status.isNullOrBlank() || status == "Semua" ||
-                        servis.status.equals(status, true)
-
-            val tanggalServis = try {
-                sdfApi.parse(servis.tanggalServis)
-            } catch (e: Exception) {
-                null
+        viewModelScope.launch {
+            // 1. Jika data lokal (allServis) kosong, coba load dari API dulu
+            if (allServis.isEmpty()) {
+                val result = repository.getServis()
+                result.onSuccess {
+                    allServis = it
+                }
             }
 
-            val cocokTanggal =
-                (dateDari == null || (tanggalServis != null && !tanggalServis.before(dateDari))) &&
-                        (dateSampai == null || (tanggalServis != null && !tanggalServis.after(dateSampai)))
+            // 2. Jalankan Filter pada data yang sudah ada (allServis)
+            val sdfOnlyDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val dateDari = tanggalDari?.let { sdfOnlyDate.parse(it) }
+            val dateSampai = tanggalSampai?.let { sdfOnlyDate.parse(it) }
 
-            cocokNama && cocokStatus && cocokTanggal
+            val filteredResult = allServis.filter { servis ->
+                // Filter Nama & Plat (Gunakan contains untuk pencarian sebagian kata)
+                val targetNama = nama?.lowercase()?.trim() ?: ""
+                val cocokNama = targetNama.isEmpty() || 
+                    (servis.namaPelanggan?.lowercase()?.contains(targetNama) == true) ||
+                    (servis.platNomor?.lowercase()?.contains(targetNama) == true)
+
+                // Filter Status
+                val cocokStatus = status.isNullOrBlank() || status == "Semua" || 
+                    servis.status.equals(status, true)
+
+                // Filter Tanggal
+                val formatTanggal = if (servis.tanggalServis.length > 10) "yyyy-MM-dd HH:mm:ss" else "yyyy-MM-dd"
+                val tanggalServisDate = try {
+                    SimpleDateFormat(formatTanggal, Locale.getDefault()).parse(servis.tanggalServis)
+                } catch (e: Exception) {
+                    null
+                }
+
+                var cocokTanggal = true
+                if (tanggalServisDate != null) {
+                    val recordDateStr = sdfOnlyDate.format(tanggalServisDate)
+                    val recordDate = sdfOnlyDate.parse(recordDateStr)!!
+                    val dariOk = dateDari == null || !recordDate.before(dateDari)
+                    val sampaiOk = dateSampai == null || !recordDate.after(dateSampai)
+                    cocokTanggal = dariOk && sampaiOk
+                }
+
+                cocokNama && cocokStatus && cocokTanggal
+            }
+
+            _servisList.value = Result.success(filteredResult)
         }
-
-        _servisList.value = Result.success(result)
     }
 
 

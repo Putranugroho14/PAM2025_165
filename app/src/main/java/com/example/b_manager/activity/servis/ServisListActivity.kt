@@ -34,6 +34,11 @@ class ServisListActivity : AppCompatActivity() {
     private val viewModel: ServisViewModel by viewModels()
     private lateinit var adapter: ServisAdapter
 
+    private var dariTanggal: String? = null
+    private var sampaiTanggal: String? = null
+    private var statusFilter: String? = null
+    private var namaFilter: String? = null
+
     private val addServisLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -136,12 +141,7 @@ class ServisListActivity : AppCompatActivity() {
         binding.searchView.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val query = s.toString().trim()
-                if (query.isNotEmpty()) {
-                    viewModel.searchServis(query)
-                } else {
-                    viewModel.loadServis()
-                }
+                applyFilters()
             }
             override fun afterTextChanged(s: android.text.Editable?) {}
         })
@@ -149,6 +149,21 @@ class ServisListActivity : AppCompatActivity() {
         binding.ivFilter.setOnClickListener {
             showFilterBottomSheet()
         }
+    }
+
+    private fun applyFilters() {
+        val query = binding.searchView.text.toString().trim()
+        
+        // Gabungkan filter dari search bar dan bottom sheet
+        // Jika namaFilter ada di bottom sheet, prioritaskan itu atau gabungkan jika perlu.
+        // Namun biasanya user mengharapkan search bar sebagai filter global.
+        
+        viewModel.filterServis(
+            nama = if (query.isEmpty()) namaFilter else query,
+            status = statusFilter,
+            tanggalDari = dariTanggal,
+            tanggalSampai = sampaiTanggal
+        )
     }
 
     private fun navigateToDetail(servis: Servis) {
@@ -215,25 +230,29 @@ class ServisListActivity : AppCompatActivity() {
 
 
         sheetBinding.btnApplyFilter.setOnClickListener {
+            namaFilter = sheetBinding.etFilterNamaPelanggan.text.toString().trim()
+            if (namaFilter?.isEmpty() == true) namaFilter = null
+            
+            val statusText = sheetBinding.spinnerFilterStatus.text.toString()
+            statusFilter = if (statusText == "Semua" || statusText.isEmpty()) null else statusText
 
-            val tanggalDari = sheetBinding.btnTanggalDari.text.toString()
+            dariTanggal = sheetBinding.btnTanggalDari.text.toString()
                 .takeIf { it != "Dari" }
 
-            val tanggalSampai = sheetBinding.btnTanggalSampai.text.toString()
+            sampaiTanggal = sheetBinding.btnTanggalSampai.text.toString()
                 .takeIf { it != "Sampai" }
 
-            viewModel.filterServis(
-                nama = null,
-                status = sheetBinding.spinnerFilterStatus.text.toString(),
-                tanggalDari = tanggalDari,
-                tanggalSampai = tanggalSampai
-            )
-
+            applyFilters()
             dialog.dismiss()
         }
 
 
         sheetBinding.btnResetFilter.setOnClickListener {
+            namaFilter = null
+            statusFilter = null
+            dariTanggal = null
+            sampaiTanggal = null
+            binding.searchView.text?.clear()
             viewModel.loadServis()
             dialog.dismiss()
         }
