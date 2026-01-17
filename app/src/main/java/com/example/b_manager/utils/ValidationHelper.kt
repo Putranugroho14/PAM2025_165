@@ -78,7 +78,8 @@ object ValidationHelper {
      */
     fun isValidPlatNomor(plat: String): Boolean {
         val upperPlat = plat.uppercase().trim()
-        return upperPlat.matches(Regex("^[A-Z]{1,2} [0-9]{1,4} [A-Z]{1,3}$"))
+        // Support with or without spaces (e.g., AD 1234 ABC or AD1234ABC)
+        return upperPlat.matches(Regex("^[A-Z]{1,2}\\s?[0-9]{1,4}\\s?[A-Z]{1,3}$"))
     }
 
     /**

@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
             val response = apiService.getPelanggan()
             if (response.isSuccessful) {
                 val total = response.body()?.data?.size ?: 0
-                runOnUiThread { binding.tvTotalPelanggan.text = total.toString() }
+                binding.tvTotalPelanggan.text = total.toString()
             }
         } catch (e: Exception) {}
     }
@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
             val response = apiService.getMobil()
             if (response.isSuccessful) {
                 val total = response.body()?.data?.size ?: 0
-                runOnUiThread { binding.tvTotalMobil.text = total.toString() }
+                binding.tvTotalMobil.text = total.toString()
             }
         } catch (e: Exception) {}
     }
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                 for (servis in allServis) {
                     if (isCurrentMonth(servis.tanggalServis, currentMonth, currentYear)) count++
                 }
-                runOnUiThread { binding.tvServisBulanIni.text = count.toString() }
+                binding.tvServisBulanIni.text = count.toString()
             }
         } catch (e: Exception) {}
     }
@@ -180,9 +180,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
                 val formattedPrice = format.format(totalPendapatan).replace("Rp", "Rp ").replace(",00", "")
-                runOnUiThread {
-                    binding.tvRevenueToday.text = formattedPrice
-                }
+                binding.tvRevenueToday.text = formattedPrice
             }
         } catch (e: Exception) {
              Log.e(TAG, "Error calculating revenue", e)
@@ -247,9 +245,8 @@ class MainActivity : AppCompatActivity() {
                     entries.add(Entry(index.toFloat(), dailyTotal.toFloat()))
                 }
 
-                runOnUiThread {
-                    val dataSet = LineDataSet(entries, "Pendapatan")
-                    dataSet.apply {
+                val dataSet = LineDataSet(entries, "Pendapatan")
+                dataSet.apply {
                         color = Color.parseColor("#6366F1")
                         valueTextColor = Color.parseColor("#6366F1")
                         lineWidth = 3f
@@ -271,7 +268,6 @@ class MainActivity : AppCompatActivity() {
                         animateY(1000)
                         invalidate()
                     }
-                }
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error loading chart data", e)

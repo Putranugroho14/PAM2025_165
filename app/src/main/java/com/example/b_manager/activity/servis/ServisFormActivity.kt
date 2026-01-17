@@ -91,9 +91,12 @@ class ServisFormActivity : AppCompatActivity() {
         })
 
         // Saat item dipilih dari dropdown
-        binding.actvMobil.setOnItemClickListener { parent, view, position, id ->
-            if (position < mobilList.size) {
-                selectedMobilId = mobilList[position].idMobil
+        binding.actvMobil.setOnItemClickListener { parent, _, position, _ ->
+            val selection = parent.getItemAtPosition(position) as String
+            val selectedMobil = mobilList.find { "${it.platNomor} - ${it.merek}" == selection }
+            
+            if (selectedMobil != null) {
+                selectedMobilId = selectedMobil.idMobil
                 binding.tilMobil.error = null
             }
         }

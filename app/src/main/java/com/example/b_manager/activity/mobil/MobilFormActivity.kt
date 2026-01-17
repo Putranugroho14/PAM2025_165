@@ -80,9 +80,12 @@ class MobilFormActivity : AppCompatActivity() {
         })
 
         // Saat item dipilih dari dropdown
-        binding.actvPelanggan.setOnItemClickListener { parent, view, position, id ->
-            if (position < pelangganList.size) {
-                selectedPelangganId = pelangganList[position].idPelanggan
+        binding.actvPelanggan.setOnItemClickListener { parent, _, position, _ ->
+            val selection = parent.getItemAtPosition(position) as String
+            val selectedPelanggan = pelangganList.find { "${it.namaPelanggan} - ${it.noHp}" == selection }
+            
+            if (selectedPelanggan != null) {
+                selectedPelangganId = selectedPelanggan.idPelanggan
                 binding.tilPelanggan.error = null
             }
         }
