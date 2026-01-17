@@ -201,10 +201,11 @@ class MobilFormActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                val input = s.toString()
-                if (input != input.uppercase()) {
-                    binding.etPlatNomor.setText(input.uppercase())
-                    binding.etPlatNomor.setSelection(binding.etPlatNomor.text.length)
+                val input = s?.toString() ?: ""
+                val upperStr = input.uppercase()
+                if (input != upperStr) {
+                    binding.etPlatNomor.setText(upperStr)
+                    binding.etPlatNomor.setSelection(upperStr.length)
                 }
             }
         })
