@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import android.widget.EditText
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -15,6 +16,7 @@ import com.example.b_manager.databinding.ActivityLoginBinding
 import com.example.b_manager.utils.SessionManager
 import com.example.b_manager.viewmodel.AuthViewModel
 import com.example.b_manager.utils.DialogUtils
+import com.example.b_manager.utils.ValidationHelper
 
 class LoginActivity : AppCompatActivity() {
 
@@ -120,26 +122,54 @@ class LoginActivity : AppCompatActivity() {
         val etUsername = dialogView.findViewById<EditText>(R.id.et_reset_username)
         val etKode = dialogView.findViewById<EditText>(R.id.et_reset_kode)
         val etNewPass = dialogView.findViewById<EditText>(R.id.et_new_password)
+        
+        val tilUsername = dialogView.findViewById<TextInputLayout>(R.id.til_reset_username)
+        val tilKode = dialogView.findViewById<TextInputLayout>(R.id.til_reset_kode)
+        val tilNewPass = dialogView.findViewById<TextInputLayout>(R.id.til_reset_password)
 
-        MaterialAlertDialogBuilder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Lupa Password")
-            .setMessage("Masukkan data di bawah ini untuk mereset password Anda.")
+            .setMessage("Gunakan Kode Registrasi (Master Key) untuk mereset password.")
             .setView(dialogView)
-            .setPositiveButton("Reset") { dialog, _ ->
-                val username = etUsername.text.toString().trim()
-                val kode = etKode.text.toString().trim()
-                val newPass = etNewPass.text.toString().trim()
+            .setPositiveButton("Reset", null) // Set null agar tidak langsung close
+            .setNegativeButton("Batal") { d, _ -> d.dismiss() }
+            .create()
 
-                if (username.isNotEmpty() && kode.isNotEmpty() && newPass.length >= 6) {
-                    viewModel.resetPassword(username, kode, newPass)
-                } else {
-                    Toast.makeText(this, "Mohon isi semua data dengan benar (Password min 6 karakter)", Toast.LENGTH_SHORT).show()
-                }
+        dialog.show()
+
+        // Override tombol Reset agar dialog tidak tertutup jika input salah
+        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val username = etUsername.text.toString().trim()
+            val kode = etKode.text.toString().trim()
+            val newPass = etNewPass.text.toString().trim()
+
+            // Reset error
+            tilUsername.error = null
+            tilKode.error = null
+            tilNewPass.error = null
+
+            var isValid = true
+            if (username.isEmpty()) {
+                tilUsername.error = "Username wajib diisi"
+                isValid = false
             }
-            .setNegativeButton("Batal") { dialog, _ ->
+            if (kode.isEmpty()) {
+                tilKode.error = "Kode registrasi wajib diisi"
+                isValid = false
+            } else if (!ValidationHelper.isValidKodeRegistrasi(kode)) {
+                tilKode.error = "Format: SA + 6 digit angka"
+                isValid = false
+            }
+            if (newPass.length < 6) {
+                tilNewPass.error = "Password minimal 6 karakter"
+                isValid = false
+            }
+
+            if (isValid) {
+                viewModel.resetPassword(username, kode, newPass)
                 dialog.dismiss()
             }
-            .show()
+        }
     }
 
     private fun navigateToMain() {

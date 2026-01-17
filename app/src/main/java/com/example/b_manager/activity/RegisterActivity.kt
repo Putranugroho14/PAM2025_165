@@ -82,6 +82,10 @@ class RegisterActivity : AppCompatActivity() {
                 binding.etKodeRegistrasi.error = "Kode registrasi kosong"
                 false
             }
+            !ValidationHelper.isValidKodeRegistrasi(kode) -> {
+                binding.etKodeRegistrasi.error = "Format: SA + 6 digit angka (Cth: SA123456)"
+                false
+            }
             user.isEmpty() -> {
                 binding.etUsername.error = "Username kosong"
                 false

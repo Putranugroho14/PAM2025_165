@@ -94,7 +94,8 @@
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
-                app:boxCornerRadiusTopStart="24dp">
+                app:boxCornerRadiusTopStart="24dp"
+                app:helperText="Format: SA + 6 digit (Cth: SA123456)">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_kode_registrasi"
                     android:layout_width="match_parent"
