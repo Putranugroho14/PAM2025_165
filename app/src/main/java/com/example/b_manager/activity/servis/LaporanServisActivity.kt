@@ -377,7 +377,7 @@ class LaporanServisActivity : AppCompatActivity() {
         val batal = list.count { it.status.equals("batal", true) }
 
         binding.tvJumlahServis.text = list.size.toString()
-        binding.tvTotalBiaya.text = formatRupiah(totalBiaya)
+        binding.tvTotalBiaya.text = com.example.b_manager.utils.ValidationHelper.formatRupiah(totalBiaya)
         binding.tvSelesai.text = selesai.toString()
         binding.tvProses.text = proses.toString()
         binding.tvBatal.text = batal.toString()
@@ -407,10 +407,5 @@ class LaporanServisActivity : AppCompatActivity() {
             cal.get(Calendar.MONTH),
             cal.get(Calendar.DAY_OF_MONTH)
         ).show()
-    }
-
-    private fun formatRupiah(value: Double): String {
-        val formatter = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
-        return formatter.format(value)
     }
 }
